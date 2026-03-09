@@ -40,7 +40,7 @@ function NewItinerary() {
 		const editUrl = `${window.location.origin}/edit/${successData.editId}`;
 
 		return (
-			<div className="md:container md:max-w-3xl px-4 py-12">
+			<div className="mx-auto md:container md:max-w-3xl px-4 py-12">
 				<div className="text-center mb-10">
 					<div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 mb-6">
 						<CheckCircle2 className="w-10 h-10" />
@@ -151,7 +151,7 @@ function NewItinerary() {
 	}
 
 	return (
-		<div className="md:container md:max-w-4xl py-10 px-4">
+		<div className="mx-auto md:container md:max-w-4xl py-10 px-4">
 			<div className="mb-8 space-y-2">
 				<h1 className="text-3xl font-bold tracking-tight">新しい旅程を作成</h1>
 				<p className="text-muted-foreground">

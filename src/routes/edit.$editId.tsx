@@ -28,7 +28,7 @@ export const Route = createFileRoute("/edit/$editId")({
 	}),
 	errorComponent: () => {
 		return (
-			<div className="md:container px-4 py-24 text-center">
+			<div className="mx-auto md:container px-4 py-24 text-center">
 				<h1 className="text-3xl font-bold mb-4">エラー</h1>
 				<p className="text-muted-foreground">
 					旅程が見つからないか、編集用URLが無効です。
@@ -83,7 +83,7 @@ function EditItinerary() {
 	// ---- Success View ----
 	if (successData) {
 		return (
-			<div className="md:container md:max-w-4xl px-4 max-w-3xl py-12">
+			<div className="mx-auto md:container md:max-w-4xl px-4 max-w-3xl py-12">
 				<div className="text-center mb-10">
 					<div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 mb-6">
 						<CheckCircle2 className="w-10 h-10" />
@@ -112,7 +112,7 @@ function EditItinerary() {
 	}
 
 	return (
-		<div className="md:container md:max-w-4xl px-4 py-10">
+		<div className="mx-auto md:container md:max-w-4xl px-4 py-10">
 			<div className="mb-8 space-y-2 flex flex-col md:flex-row justify-between items-start md:items-end border-b pb-4">
 				<div>
 					<h1 className="text-3xl font-bold tracking-tight">旅程を編集</h1>

@@ -80,7 +80,7 @@ function ViewItinerary() {
 
 	if (!itinerary) {
 		return (
-			<div className="md:container px-4 py-24 text-center">
+			<div className="mx-auto md:container px-4 py-24 text-center">
 				<h1 className="text-3xl font-bold">旅程が見つかりません</h1>
 				<p className="text-muted-foreground mt-4">
 					リンクが無効か、旅程が削除された可能性があります。
@@ -162,7 +162,7 @@ function ViewItinerary() {
 	};
 
 	return (
-		<div className="md:container md:max-w-4xl px-4 py-10 space-y-8">
+		<div className="mx-auto md:container md:max-w-4xl px-4 py-10 space-y-8">
 			{/* Header section with share button */}
 			<div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between bg-card p-6 rounded-2xl border shadow-sm">
 				<div>
