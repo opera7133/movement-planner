@@ -1,0 +1,4 @@
+day,departureTime,departurePoint,travelMethod,lineName,arrivalTime,arrivalPoint,fare,isContinuousFare,notes
+1,09:00,東京,Train,東海道新幹線,11:30,名古屋,6680,,
+1,11:45,名古屋,Train,近鉄特急,13:10,京都,3410,,
+2,10:00,京都,Train,JR嵯峨野線,10:15,嵯峨嵐山,240,,

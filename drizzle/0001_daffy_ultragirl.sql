@@ -1,0 +1,1 @@
+ALTER TABLE `itineraries` ADD `edit_id` text NOT NULL;
