@@ -225,7 +225,6 @@ export const updateItinerary = createServerFn({ method: "POST" })
 				)
 				.run();
 		}
-
 		// Delete existing movements and replace them entirely to handle sorting/deletion cleanly
 		db.delete(movements).where(eq(movements.itineraryId, id)).run();
 

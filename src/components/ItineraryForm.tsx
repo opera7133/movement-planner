@@ -101,6 +101,18 @@ export function ItineraryForm({
 				}
 			}
 		},
+		onSubmitInvalid: async ({ value }) => {
+			try {
+				setError("");
+				await onSubmit(value, token);
+			} catch (err: any) {
+				setError(err.message || "エラーが発生しました");
+				if (isNew) {
+					turnstileRef.current?.reset();
+				}
+			}
+		},
+		canSubmitWhenInvalid: true,
 	});
 
 	// Grouped inputs for a single movement
@@ -571,8 +583,7 @@ export function ItineraryForm({
 								テンプレートをダウンロード
 							</a>
 						</div>
-						<form.Subscribe selector={(state) => state.values.days}>
-							{(days) => (
+						<div>
 								<label className="shrink-0 inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 cursor-pointer">
 									CSVファイルを選択
 									<input
@@ -606,7 +617,10 @@ export function ItineraryForm({
 														notes: cols[9]?.trim() || "",
 													};
 												});
-												const currentDays = [...days];
+												const currentDays = [{
+													day: 1,
+													movements: []
+												}];
 												for (const m of newMovements) {
 													const dayEntry = currentDays.find(
 														(d) => d.day === m.day,
@@ -632,8 +646,7 @@ export function ItineraryForm({
 										}}
 									/>
 								</label>
-							)}
-						</form.Subscribe>
+							</div>
 					</div>
 				</CardContent>
 			</Card>
