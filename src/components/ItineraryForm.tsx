@@ -617,7 +617,10 @@ export function ItineraryForm({
 														notes: cols[9]?.trim() || "",
 													};
 												});
-												const currentDays = [{
+												const currentDays: {
+													day: number,
+													movements: any[]
+												}[] = [{
 													day: 1,
 													movements: []
 												}];
