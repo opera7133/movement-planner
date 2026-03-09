@@ -304,7 +304,7 @@ function ViewItinerary() {
 								{dayNum}日目
 							</h2>
 
-							<div className="relative border-l-2 border-muted ml-5 pl-8 space-y-10 py-4">
+							<div className="relative border-l-2 border-muted ml-5 pl-4 space-y-10 py-4">
 								{dayMovements.map((m, idx) => (
 									<div key={idx} className="relative">
 										{/* Timeline dot */}
