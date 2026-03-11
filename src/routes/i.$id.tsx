@@ -31,6 +31,10 @@ export const Route = createFileRoute("/i/$id")({
 			{
 				title: `${loaderData?.title} | Movement Planner`,
 			},
+			{
+        name: 'description',
+        content: (loaderData?.description || "").length > 20 ? (loaderData?.description || "").substring(0, 20) + "..." : (loaderData?.description || ""),
+      },
 		],
 	}),
 });
@@ -318,7 +322,7 @@ function ViewItinerary() {
 											<CardContent className="p-0">
 												<div className="flex flex-col sm:flex-row items-stretch">
 													{/* Time block */}
-													<div className="bg-muted/30 px-6 py-4 border-b sm:border-b-0 sm:border-r border-border/50 shrink-0 w-full sm:w-48 flex flex-row sm:flex-col justify-between sm:justify-start items-center sm:items-start gap-4">
+													<div className="bg-muted/30 px-6 py-4 border-b sm:border-b-0 sm:border-r border-border/50 shrink-0 w-full sm:w-48 flex flex-row sm:flex-col justify-between sm:justify-around items-center sm:items-start gap-4">
 														<div className="flex items-center gap-2 text-foreground font-semibold text-lg whitespace-nowrap">
 															<MapPin className="h-4 w-4 text-primary" />{" "}
 															{m.departureTime}

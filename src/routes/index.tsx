@@ -5,7 +5,7 @@ export const Route = createFileRoute("/")({ component: App });
 
 function App() {
 	return (
-		<main className="container py-24 flex flex-col items-center justify-center min-h-[calc(100vh-140px)] text-center">
+		<main className="mx-auto container py-24 flex flex-col items-center justify-center min-h-[calc(100vh-140px)] text-center">
 			<div className="absolute inset-0 -z-10 h-full w-full bg-background bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] dark:bg-[radial-gradient(#333_1px,transparent_1px)] bg-size-[16px_16px] mask-[radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]"></div>
 
 			<div className="space-y-6 max-w-3xl">

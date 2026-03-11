@@ -7,7 +7,7 @@ import { itineraries, movements, tickets } from "../db/schema";
 export const getItinerary = createServerFn({ method: "GET" })
 	.inputValidator((d: string) => d)
 	.handler(async ({ data: id }) => {
-		const itinerary = db
+		const itinerary = await db
 			.select()
 			.from(itineraries)
 			.where(eq(itineraries.id, id))
@@ -17,14 +17,14 @@ export const getItinerary = createServerFn({ method: "GET" })
 			return null;
 		}
 
-		const m = db
+		const m = await db
 			.select()
 			.from(movements)
 			.where(eq(movements.itineraryId, id))
 			.orderBy(movements.day, movements.displayOrder)
 			.all();
 
-		const t = db
+		const t = await db
 			.select()
 			.from(tickets)
 			.where(eq(tickets.itineraryId, id))
@@ -36,7 +36,7 @@ export const getItinerary = createServerFn({ method: "GET" })
 export const getItineraryByEditId = createServerFn({ method: "GET" })
 	.inputValidator((d: string) => d)
 	.handler(async ({ data: editId }) => {
-		const itinerary = db
+		const itinerary = await db
 			.select()
 			.from(itineraries)
 			.where(eq(itineraries.editId, editId))
@@ -46,14 +46,14 @@ export const getItineraryByEditId = createServerFn({ method: "GET" })
 			return null;
 		}
 
-		const m = db
+		const m = await db
 			.select()
 			.from(movements)
 			.where(eq(movements.itineraryId, itinerary.id))
 			.orderBy(movements.day, movements.displayOrder)
 			.all();
 
-		const t = db
+		const t = await db
 			.select()
 			.from(tickets)
 			.where(eq(tickets.itineraryId, itinerary.id))
@@ -113,7 +113,7 @@ export const createItinerary = createServerFn({ method: "POST" })
 		const id = nanoid(10);
 		const editId = nanoid(21); // Longer ID for editing security
 
-		db.insert(itineraries)
+		await db.insert(itineraries)
 			.values({
 				id,
 				editId,
@@ -123,7 +123,7 @@ export const createItinerary = createServerFn({ method: "POST" })
 			.run();
 
 		if (data.tickets && data.tickets.length > 0) {
-			db.insert(tickets)
+			await db.insert(tickets)
 				.values(
 					data.tickets.map((t) => ({
 						id: t.id,
@@ -136,7 +136,7 @@ export const createItinerary = createServerFn({ method: "POST" })
 		}
 
 		if (data.movements.length > 0) {
-			db.insert(movements)
+			await db.insert(movements)
 				.values(
 					data.movements.map((m) => ({
 						itineraryId: id,
@@ -189,7 +189,7 @@ export const updateItinerary = createServerFn({ method: "POST" })
 	.inputValidator((d: UpdateItineraryInput) => d)
 	.handler(async ({ data }) => {
 		// Find the itinerary by editId to get the public id
-		const itinerary = db
+		const itinerary = await db
 			.select()
 			.from(itineraries)
 			.where(eq(itineraries.editId, data.editId))
@@ -202,7 +202,7 @@ export const updateItinerary = createServerFn({ method: "POST" })
 		const id = itinerary.id;
 
 		// Update title
-		db.update(itineraries)
+		await db.update(itineraries)
 			.set({
 				title: data.title || "Untitled Itinerary",
 				description: data.description,
@@ -211,10 +211,10 @@ export const updateItinerary = createServerFn({ method: "POST" })
 			.run();
 
 		// Handle tickets similarly: delete all existing, insert new
-		db.delete(tickets).where(eq(tickets.itineraryId, id)).run();
+		await db.delete(tickets).where(eq(tickets.itineraryId, id)).run();
 
 		if (data.tickets && data.tickets.length > 0) {
-			db.insert(tickets)
+			await db.insert(tickets)
 				.values(
 					data.tickets.map((t) => ({
 						id: t.id,
@@ -226,10 +226,10 @@ export const updateItinerary = createServerFn({ method: "POST" })
 				.run();
 		}
 		// Delete existing movements and replace them entirely to handle sorting/deletion cleanly
-		db.delete(movements).where(eq(movements.itineraryId, id)).run();
+		await db.delete(movements).where(eq(movements.itineraryId, id)).run();
 
 		if (data.movements.length > 0) {
-			db.insert(movements)
+			await db.insert(movements)
 				.values(
 					data.movements.map((m) => ({
 						itineraryId: id,
